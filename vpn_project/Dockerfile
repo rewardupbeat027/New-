@@ -10,6 +10,6 @@ COPY requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
-COPY ../vpn-project/ vpn-project/ app/
+COPY ../pythonProject6/ app/
 
 CMD ["python","manage.py","runserver","0.0.0.0:8000"]
