@@ -22,7 +22,7 @@ jobs:
     - name: Deploy to Server
       run: |
         ssh -o StrictHostKeyChecking=no root@5.101.2.221 << 'EOF'
-          cd /root/pythonProject3
+          cd /root/pythonProject5
           git pull origin master
           docker-compose down
           docker-compose build
