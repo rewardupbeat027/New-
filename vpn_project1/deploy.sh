@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Путь до директории вашего проекта
-PROJECT_DIR="/root/pythonProject5/vpn_project"
+PROJECT_DIR="/root/pythonProject5"
 
 # Переходим в директорию проекта
 cd $PROJECT_DIR
