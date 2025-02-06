@@ -27,5 +27,5 @@ jobs:
 
     - name: Build and test Docker image
       run: |
-        docker build -t vpn_project .
-        docker run --rm vpn_project:latest 
+        docker build -t vpn-project .
+        docker run --rm vpn-project:latest 
