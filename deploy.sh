@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Путь до директории вашего проекта
-PROJECT_DIR="/root/pythonProject5"
+PROJECT_DIR="/root/New-"
 
 # Переходим в директорию проекта
 cd $PROJECT_DIR
