@@ -14,29 +14,16 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up SSH
-      run: |
-          # Создаём директорию для ключей, если её нет
-          mkdir -p ~/root/.ssh
-          
-          # Сохраняем SSH-ключ в файл
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/root/.ssh/id_rsa
-          
-          # Применяем нужные права доступа к файлу
-          chmod 600 ~/root/.ssh/id_rsa
-          
-          # Добавляем ключ в SSH-агент
-          eval $(ssh-agent -s)
-          ssh-add ~/root/.ssh/id_rsa
-          
-          # Добавляем GitHub в known_hosts для предотвращения предупреждений
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to Server
       run: |
-        ssh -o StrictHostKeyChecking=no root@5.101.2.221 << 'EOF'
+        ssh -o ServerAliveInterval=600 root@5.101.2.221 << 'EOF'
           cd /root/New-
-          git pull 
+          git pull origin master
           docker-compose down
           docker-compose build
           docker-compose up -d
