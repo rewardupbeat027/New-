@@ -17,11 +17,11 @@ jobs:
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
 
     - name: Deploy to Server
       run: |
-        ssh -o ServerAliveInterval=600 root@5.101.2.221 << 'EOF'
+        ssh -o StrictHostKeyChecking=no root@5.101.2.221 << 'EOF'
           cd /root/New-
           git pull origin master
           docker-compose down
