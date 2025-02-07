@@ -17,8 +17,9 @@ jobs:
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
+        ssh-private-key:
           eval $(ssh-agent -s)
+          ${{ secrets.SSH_PRIVATE_KEY }} > ~/.ssh/id_rsa
 
     - name: Deploy to Server
       run: |
