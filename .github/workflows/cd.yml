@@ -16,13 +16,21 @@ jobs:
 
     - name: Set up SSH
       run: |
-        eval $(ssh-agent -s)
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-add ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          # Создаём директорию для ключей, если её нет
+          mkdir -p ~/.ssh
+          
+          # Сохраняем SSH-ключ в файл
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          
+          # Применяем нужные права доступа к файлу
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Добавляем ключ в SSH-агент
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
+          
+          # Добавляем GitHub в known_hosts для предотвращения предупреждений
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
 
     - name: Deploy to Server
       run: |
