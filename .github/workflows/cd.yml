@@ -17,17 +17,17 @@ jobs:
     - name: Set up SSH
       run: |
           # Создаём директорию для ключей, если её нет
-          mkdir -p ~/.ssh
+          mkdir -p ~/root/.ssh
           
           # Сохраняем SSH-ключ в файл
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/root/.ssh/id_rsa
           
           # Применяем нужные права доступа к файлу
-          chmod 600 ~/.ssh/id_rsa
+          chmod 600 ~/root/.ssh/id_rsa
           
           # Добавляем ключ в SSH-агент
           eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
+          ssh-add ~/root/.ssh/id_rsa
           
           # Добавляем GitHub в known_hosts для предотвращения предупреждений
           ssh-keyscan github.com >> ~/.ssh/known_hosts
