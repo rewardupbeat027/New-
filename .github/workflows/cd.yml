@@ -36,7 +36,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no root@5.101.2.221 << 'EOF'
           cd /root/New-
-          git pull origin master
+          git pull 
           docker-compose down
           docker-compose build
           docker-compose up -d
